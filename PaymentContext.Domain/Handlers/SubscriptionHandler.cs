@@ -38,7 +38,7 @@ namespace PaymentContext.Domain.Handlers
                 AddNotification("Document", "Este CPF já está em uso");
 
             // Verificar se email está cadastrado
-            if (_repository.DocumentExists(command.Email))
+            if (_repository.EmailExists(command.Email))
                 AddNotification("Email", "Este e-mail já está em uso");
 
             // Gerar os VOs
@@ -135,6 +135,9 @@ namespace PaymentContext.Domain.Handlers
 
             // Agrupar validacoes
             AddNotifications(student.Name, student.Document, student.Email, payment.Address, student, subscription, payment);
+
+            if (Invalid)
+                return new CommandResult(false, "Não foi possível realizar sua assinatura.");
 
             // Salvar informações
             _repository.CreateSubscription(student);
