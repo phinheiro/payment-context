@@ -29,8 +29,8 @@ namespace PaymentContext.Domain.Entities
                 .Requires()
                 .IsGreaterOrEqualsThan(DateTime.Now, payment.PaidDate, "Subscription.Payments", "A data do pagamento deve ser futura")
             );
-
-            _payments.Add(payment);
+            if (payment.Valid && Valid)
+                _payments.Add(payment);
         }
 
         public void Activate() {
