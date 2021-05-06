@@ -14,6 +14,6 @@ namespace PaymentContext.Domain.ValueObjects
                 .IsEmail(Address, "Email.Address", "Invalid email"));
         }
 
-        public string Address { get; set; }
+        public string Address { get; private set; }
     }
 }
